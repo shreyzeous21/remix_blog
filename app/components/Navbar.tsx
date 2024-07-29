@@ -217,7 +217,7 @@ const Navbar = () => {
                 }
                 to="/blog"
               >
-                Blog
+                Daily Blog
               </NavLink>
               <NavLink
                 prefetch="intent"
@@ -228,7 +228,7 @@ const Navbar = () => {
                 }
                 to="/projects"
               >
-                Projects
+                Projects - Github
               </NavLink>
             </div>
           </Disclosure.Panel>
