@@ -69,7 +69,7 @@ const IndexPage = () => {
         </div>
         <div className="prose max-w-none prose-lg pt-8 pb-8 dark:prose-invert xl:col-span-2">
           <p>
-            Hey everyone my name is Shrey, I am 18 years old and i am a Full
+            Hey everyone my name is Shrey, I am 22 years old and i am a Full
             Stack developer based in Noida/India
           </p>
           <p>
