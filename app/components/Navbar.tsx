@@ -1,10 +1,23 @@
 import { Disclosure } from "@headlessui/react";
 import { Link, NavLink } from "@remix-run/react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Theme, useTheme } from "remix-themes";
 
 const Navbar = () => {
   const [theme, setTheme] = useTheme();
+  const [dateTime, setDateTime] = useState(new Date());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setDateTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalId); // Cleanup interval on unmount
+  }, []);
+
+  const currentYear = dateTime.getFullYear();
+  const currentDate = dateTime.toLocaleDateString(); // Date formatting
+
   return (
     <Disclosure as="nav">
       {({ open }) => (
@@ -19,6 +32,15 @@ const Navbar = () => {
                     </h1>
                   </Link>
                 </div>
+                <div className="flex items-center space-x-4 p-2 m-3 rounded-lg border border-teal-500 bg-white/30 dark:bg-gray-800/50 backdrop-blur-lg shadow-md">
+                  <span className="text-xl text-gray-500 dark:text-gray-300">
+                    {currentDate}
+                  </span>
+                  <span className="text-xl   px-1 py-1  text-gray-500 dark:text-gray-300">
+                    {currentYear}
+                  </span>
+                </div>
+
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   <NavLink
                     prefetch="intent"
@@ -40,7 +62,7 @@ const Navbar = () => {
                     }
                     to="/blog"
                   >
-                    Blog
+                    Daily Blog
                   </NavLink>
                   <NavLink
                     prefetch="intent"
@@ -51,7 +73,7 @@ const Navbar = () => {
                     }
                     to="/projects"
                   >
-                    Projects
+                    Projects - Github
                   </NavLink>
                   <button
                     onClick={() =>
@@ -60,7 +82,7 @@ const Navbar = () => {
                       )
                     }
                   >
-                    {theme == Theme.DARK ? (
+                    {theme === Theme.DARK ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -104,7 +126,7 @@ const Navbar = () => {
                     )
                   }
                 >
-                  {theme == Theme.DARK ? (
+                  {theme === Theme.DARK ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -164,7 +186,7 @@ const Navbar = () => {
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                        d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
                       />
                     </svg>
                   )}
@@ -174,13 +196,13 @@ const Navbar = () => {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="pt-2 pb-3 space-y-1">
+            <div className="space-y-1 px-2 pt-2 pb-3">
               <NavLink
                 prefetch="intent"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-teal-50 border-teal-500 text-teal-500 block pl-3 pr-4 py-2 border-l-4 text-base font-medium dark:bg-gray-800"
-                    : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium dark:text-white dark:hover:bg-gray-700"
+                    ? "border-teal-500 dark:bg-gray-900 dark:text-white block px-3 py-2 text-base font-medium border-b-2"
+                    : "border-transparent text-gray-500 dark:text-gray-300 dark:hover:text-white block px-3 py-2 text-base font-medium"
                 }
                 to="/"
               >
@@ -190,8 +212,8 @@ const Navbar = () => {
                 prefetch="intent"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-teal-50 border-teal-500 text-teal-500 block pl-3 pr-4 py-2 border-l-4 text-base font-medium dark:bg-gray-800"
-                    : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium dark:text-white dark:hover:bg-gray-700"
+                    ? "border-teal-500 dark:bg-gray-900 dark:text-white block px-3 py-2 text-base font-medium border-b-2"
+                    : "border-transparent text-gray-500 dark:text-gray-300 dark:hover:text-white block px-3 py-2 text-base font-medium"
                 }
                 to="/blog"
               >
@@ -201,8 +223,8 @@ const Navbar = () => {
                 prefetch="intent"
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-teal-50 border-teal-500 text-teal-500 block pl-3 pr-4 py-2 border-l-4 text-base font-medium dark:bg-gray-800"
-                    : "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium dark:text-white dark:hover:bg-gray-700"
+                    ? "border-teal-500 dark:bg-gray-900 dark:text-white block px-3 py-2 text-base font-medium border-b-2"
+                    : "border-transparent text-gray-500 dark:text-gray-300 dark:hover:text-white block px-3 py-2 text-base font-medium"
                 }
                 to="/projects"
               >
